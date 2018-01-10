@@ -1,7 +1,9 @@
+using AnagramsKata.Domain;
 using AnagramsKata.Domain.AlphabeticSorter;
-using AnagramsKata.Domain.AnagramChecker;
 using AnagramsKata.Domain.AnagramController;
+using AnagramsKata.Domain.WordProvider;
 using AnagramsKata.IntegrationTests.Mock;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -13,8 +15,9 @@ namespace AnagramsKata.IntegrationTests
         [Fact]
         public void WhenProvidedAListEnsureAllItemsArePairedCorrectly()
         {
-            //Ideally this would use the same ioc as the main project to ensure we're testing the same implementations
-            IAnagramController controller = new AnagramController(new AnagramChecker(), new MockWordProvider(), new AlphabeticSorter());
+            IoC.ServiceCollection.AddSingleton<IWordProvider, MockWordProvider>();
+
+            IAnagramController controller = IoC.Container.GetService<IAnagramController>();
             Dictionary<string, string> expected = new Dictionary<string, string>
             {
                 {"aelpp", "apple" },

@@ -1,5 +1,4 @@
 ﻿using AnagramsKata.Domain.AlphabeticSorter;
-using AnagramsKata.Domain.AnagramChecker;
 using AnagramsKata.Domain.WordProvider;
 using System;
 using System.Collections.Generic;
@@ -9,13 +8,11 @@ namespace AnagramsKata.Domain.AnagramController
 {
     public class AnagramController : IAnagramController
     {
-        private IAnagramChecker _checker;
         private IWordProvider _provider;
         private IAlphabeticSorter _sorter;
-        public AnagramController(IAnagramChecker checker, IWordProvider provider, IAlphabeticSorter sorter)
+        public AnagramController(IWordProvider provider, IAlphabeticSorter sorter)
         {
             _provider = provider;
-            _checker = checker;
             _sorter = sorter;
         }
 
